@@ -14,26 +14,23 @@ import static com.sakurafuld.beginningwiththeend.Deets.*;
 
 
 @Mod(WITH)
-public class WithTheEnd
-{
+public class WithTheEnd {
     public static final String TAG = "ValineLogInWithTablet";
 
     public WithTheEnd() {
-
         MinecraftForge.EVENT_BUS.register(this);
-
     }
+
     @SubscribeEvent
-    public void loggedIn(PlayerEvent.Clone event) {
+    public void clone(PlayerEvent.Clone event) {
         required(LogicalSide.SERVER).run(() -> {
             if(!event.isWasDeath()) {
                 event.getEntity().getPersistentData().putBoolean(TAG, true);
             }
         });
-
     }
     @SubscribeEvent
-    public void death(LivingEvent.LivingTickEvent event) {
+    public void tick(LivingEvent.LivingTickEvent event) {
         required(LogicalSide.SERVER).run(() -> {
             if(event.getEntity() instanceof Player player && !player.getPersistentData().contains(TAG)) {
                 player.addItem(new ItemStack(PEItems.TRANSMUTATION_TABLET));

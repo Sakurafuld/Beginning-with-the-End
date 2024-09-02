@@ -18,8 +18,6 @@ public class Deets {
     public static final Logger LOG = LoggerFactory.getLogger(WITH);
 
 
-    public static final String PROJECTE = "curios";
-
     public static Act required(String modid) {
         return FMLLoader.getLoadingModList().getModFileById(modid) != null ? Act.TRUE : Act.FALSE;
     }

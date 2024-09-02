@@ -38,14 +38,9 @@ public class WithTheEnd
     @SubscribeEvent
     public void death(LivingEvent.LivingTickEvent event) {
         required(LogicalSide.SERVER).run(() -> {
-            if(event.getEntity() instanceof Player player) {
-                if((event.getEntity().level().getGameTime() & 40) == 0)
-                    LOG.debug("{}-tickNotContain={}", side(), !player.getPersistentData().contains(TAG));
-                if(!player.getPersistentData().contains(TAG)) {
-                    LOG.debug("{}-tickAdd", side());
-                    player.addItem(new ItemStack(PEItems.TRANSMUTATION_TABLET));
-                    player.getPersistentData().putBoolean(TAG, true);
-                }
+            if(event.getEntity() instanceof Player player && !player.getPersistentData().contains(TAG)) {
+                player.addItem(new ItemStack(PEItems.TRANSMUTATION_TABLET));
+                player.getPersistentData().putBoolean(TAG, true);
             }
         });
     }

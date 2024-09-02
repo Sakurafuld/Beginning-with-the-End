@@ -6,11 +6,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import static com.sakurafuld.beginningwiththeend.Deets.*;
 
@@ -29,7 +27,6 @@ public class WithTheEnd
     public void loggedIn(PlayerEvent.Clone event) {
         required(LogicalSide.SERVER).run(() -> {
             if(!event.isWasDeath()) {
-                LOG.debug("{}-notDeath", side());
                 event.getEntity().getPersistentData().putBoolean(TAG, true);
             }
         });
